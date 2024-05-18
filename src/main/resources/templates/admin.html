@@ -97,11 +97,11 @@
                                 <div class="form-group mt-4">
                                     <label class="row font-weight-bold justify-content-center"
                                            for="roleSelect">Role</label>
-                                    <select multiple class="form-control" size="2" id="roleSelect"
-                                            name="roles">
-
-                                        <option id="roleNewUser" value="2">USER</option>
-                                        <option id="roleNewAdmin" value="1">ADMIN</option>
+                                    <select class="form-select"
+                                            aria-label="Default select example"
+                                            id="roleSelect"
+                                            name="roles"
+                                            required>
                                     </select>
                                 </div>
                                 <button type="submit" class="btn btn-success btn-lg mt-3" id="signup-submit"
@@ -164,9 +164,11 @@
                     </div>
                     <div>
                         <label class="mt-4" for="rolesForEditing">Role</label>
-                        <select multiple class="form-control" size="2" id="rolesForEditing" name="roles">
-                            <option id="roleUser" value="2">USER</option>
-                            <option id="roleAdmin" value="1">ADMIN</option>
+                        <select class="form-select"
+                                aria-label="Default select example"
+                                id="rolesForEditing"
+                                name="roles"
+                                required>
                         </select>
                     </div>
                 </form>

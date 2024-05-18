@@ -21,10 +21,10 @@ public class User implements UserDetails {
     private Long id;
     @Column(name = "email", unique = true)
     private String username;
-    @Column(name = "password")
-    private String password;
     @Column(name = "name")
     private String name;
+    @Column(name = "password")
+    private String password;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @Fetch(FetchMode.JOIN)

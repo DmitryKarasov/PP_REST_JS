@@ -3,7 +3,9 @@ package ru.kata.spring.boot_security.demo.controllers;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import ru.kata.spring.boot_security.demo.models.Role;
 import ru.kata.spring.boot_security.demo.models.User;
+import ru.kata.spring.boot_security.demo.services.RoleService;
 import ru.kata.spring.boot_security.demo.services.UserService;
 
 import java.util.List;
@@ -15,9 +17,11 @@ import java.util.List;
 public class AdminController {
 
     private final UserService userService;
+    private final RoleService roleService;
 
-    public AdminController(UserService userService) {
+    public AdminController(UserService userService, RoleService roleService) {
         this.userService = userService;
+        this.roleService = roleService;
     }
 
     @GetMapping("/users")
@@ -48,5 +52,11 @@ public class AdminController {
     public ResponseEntity<HttpStatus> updateUser(@RequestBody User user, @PathVariable("id") Long id) {
         userService.updateUser(user);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping("/roles")
+    public ResponseEntity<List<Role>> getAllRoles() {
+        List<Role> roleList = roleService.getAllRoles();
+        return ResponseEntity.ok(roleList);
     }
 }

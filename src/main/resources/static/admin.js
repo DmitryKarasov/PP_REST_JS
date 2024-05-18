@@ -111,12 +111,13 @@ async function newUser() {
 async function addNewUser(event) {
     event.preventDefault();
     let listOfRole = [];
-    for (let i = 0; i < form_new.roleSelect.options.length; i++) {
-        if (form_new.roleSelect.options[i].selected) {
-            listOfRole.push({id: form_new.roleSelect.options[i].value,
-                role: form_new.roleSelect.options[i].text});
+    for (let i = 0; i < form_new.roles.options.length; i++) {
+        if (form_new.roles.options[i].selected) {
+            listOfRole.push({id: form_new.roles.options[i].value,
+                role: form_new.roles.options[i].text});
         }
     }
+
     let method = {
         method: 'POST',
         headers: {
@@ -139,6 +140,28 @@ async function addNewUser(event) {
         deactivateTab.classList.remove('active');
     });
 }
+
+//
+function loadRolesForNewUser() {
+    let selectAdd = document.getElementById("roleSelect");
+
+    selectAdd.innerHTML = "";
+
+    fetch("http://localhost:8080/admin/roles")
+        .then(res => res.json())
+        .then(data => {
+            data.forEach(role => {
+                let option = document.createElement("option");
+                option.value = role.id;
+                option.text = role.name.toString().replace('ROLE_', '');
+                selectAdd.appendChild(option);
+            });
+        })
+        .catch(error => console.error(error));
+}
+
+window.addEventListener("load", loadRolesForNewUser);
+//
 
 const form_ed = document.getElementById('formForEditing');
 const id_ed = document.getElementById('id_ed');
@@ -190,6 +213,28 @@ async function editUser() {
         getAdminPage();
     })
 }
+
+//
+function loadRolesForEditing() {
+    let selectAdd = document.getElementById("rolesForEditing");
+
+    selectAdd.innerHTML = "";
+
+    fetch("http://localhost:8080/admin/roles")
+        .then(res => res.json())
+        .then(data => {
+            data.forEach(role => {
+                let option = document.createElement("option");
+                option.value = role.id;
+                option.text = role.name.toString().replace('ROLE_', '');
+                selectAdd.appendChild(option);
+            });
+        })
+        .catch(error => console.error(error));
+}
+
+window.addEventListener("load", loadRolesForEditing);
+//
 
 const form_del = document.getElementById('formForDeleting');
 const id_del = document.getElementById('id_del');
